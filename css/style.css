@@ -1,0 +1,37 @@
+body {
+  /*height: 100%;*/
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.container {
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+  width: 75%;
+  position: absolute;
+}
+
+.sidebar {
+  height: 100%;
+  width: 25%;
+  left: 75%;
+  position: absolute;
+  padding: 2%;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+#sidebarIcon {
+  width: 35px;
+  height: 35px;
+}
