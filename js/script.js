@@ -53,6 +53,7 @@ app.controller('MapController', function($scope, $http) {
       var position = { lat: result.coord.lat, lng: result.coord.lon };
       var marker = new google.maps.Marker({
         position: position,
+        anchorPoint: new google.maps.Point(0, -15),
         title: result.name,
         map: map,
         // icon: image
@@ -67,7 +68,8 @@ app.controller('MapController', function($scope, $http) {
 
       var windowContent =
         '<p><strong>' + result.name.toLowerCase() + '</strong></p>' +
-        '<p>current temp: ' + result.main.temp + '°F<br>' +
+        '<p>weather: ' + result.weather[0].description.toLowerCase() + '<br>' +
+        'current temp: ' + result.main.temp + '°F<br>' +
         'high temp: ' + result.main.temp_max + '°F<br>' +
         'low temp: ' + result.main.temp_min + '°F<br>' +
         'pressure: ' + result.main.pressure + ' hPa<br>' +

@@ -1,9 +1,7 @@
 body {
-  /*height: 100%;*/
   margin: 0;
   padding: 0;
   width: 100%;
-  box-sizing: border-box;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
@@ -25,6 +23,7 @@ body {
   padding: 2%;
   overflow: auto;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 h2 {
@@ -34,4 +33,5 @@ h2 {
 #sidebarIcon {
   width: 35px;
   height: 35px;
+  vertical-align: middle;
 }
