@@ -24,7 +24,7 @@ body {
   padding: 2%;
   overflow: auto;
   box-sizing: border-box;
-
+  background-color: #cccccc;
 }
 
 p {
@@ -35,8 +35,7 @@ h2 {
   margin-top: 0;
 }
 
-#sidebarIcon {
-  width: 35px;
-  height: 35px;
+.sidebarIcon {
+  width: 15px;
   vertical-align: middle;
 }

@@ -18,7 +18,10 @@
         <hr>
         <div class="city" ng-repeat="city in result" >
           <p ng-click="city.infoWindowSidebar()">
-            <img id="sidebarIcon" ng-src="http://openweathermap.org/img/w/{{city.weather[0].icon}}.png">
+            <img class="sidebarIcon" ng-show="city.main.temp > 80" src="img/hot.png">
+            <img class="sidebarIcon" ng-show="city.main.temp >= 60 && city.main.temp <= 80" src="img/normal.png">
+            <img class="sidebarIcon" ng-show="city.main.temp < 60" src="img/cold.png">
+            <!-- <img id="sidebarIcon" ng-src="http://openweathermap.org/img/w/{{city.weather[0].icon}}.png"> -->
             <br>
             {{city.name}}
             <br>
