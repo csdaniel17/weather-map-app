@@ -9,11 +9,11 @@
   </head>
   <body ng-app="app" ng-controller="MapController">
 
-    <div class="container">
-
       <div id="map"></div>
 
-      <div class="sidebar">
+      <ng-view></ng-view>
+
+      <!-- <div class="sidebar">
         <h2>weather map app</h2>
         <hr>
         <div class="city" ng-repeat="city in result" >
@@ -21,7 +21,7 @@
             <img class="sidebarIcon" ng-show="city.main.temp > 80" src="img/hot.png">
             <img class="sidebarIcon" ng-show="city.main.temp >= 60 && city.main.temp <= 80" src="img/normal.png">
             <img class="sidebarIcon" ng-show="city.main.temp < 60" src="img/cold.png">
-            <!-- <img id="sidebarIcon" ng-src="http://openweathermap.org/img/w/{{city.weather[0].icon}}.png"> -->
+            <img id="sidebarIcon" ng-src="http://openweathermap.org/img/w/{{city.weather[0].icon}}.png">
             <br>
             {{city.name}}
             <br>
@@ -30,9 +30,8 @@
           <hr>
         </div>
 
-      </div>
+      </div> -->
 
-    </div>
 
 
 
