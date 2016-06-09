@@ -15,11 +15,18 @@
 
       <div class="sidebar">
         <h2>weather map app</h2>
-        <p ng-repeat="city in result" ng-click="city.infoWindowSidebar()">
-          <img id="sidebarIcon" ng-src="http://openweathermap.org/img/w/{{city.weather[0].icon}}.png">
-          {{city.name}} -
-          {{city.main.temp}}°F
-        </p>
+        <hr>
+        <div class="city" ng-repeat="city in result" >
+          <p ng-click="city.infoWindowSidebar()">
+            <img id="sidebarIcon" ng-src="http://openweathermap.org/img/w/{{city.weather[0].icon}}.png">
+            <br>
+            {{city.name}}
+            <br>
+            {{city.main.temp}}°F
+          </p>
+          <hr>
+        </div>
+
       </div>
 
     </div>

@@ -3,6 +3,7 @@ body {
   padding: 0;
   width: 100%;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
+  text-align: center;
 }
 
 .container {
@@ -11,18 +12,22 @@ body {
 
 #map {
   height: 100%;
-  width: 75%;
+  width: 80%;
   position: absolute;
 }
 
 .sidebar {
   height: 100%;
-  width: 25%;
-  left: 75%;
+  width: 20%;
+  left: 80%;
   position: absolute;
   padding: 2%;
   overflow: auto;
   box-sizing: border-box;
+
+}
+
+p {
   cursor: pointer;
 }
 

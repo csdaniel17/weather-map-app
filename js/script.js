@@ -23,25 +23,29 @@ var cityIds = [
 
 var cityIdList = cityIds.join(',');
 
-//icon base url + results.weather[0].icon
-var iconBase = 'http://openweathermap.org/img/w/';
-
 //app module
 var app = angular.module('app', []);
 
-//app controller
-app.controller('MapController', function($scope, $http) {
-  $http({
-    url:'http://api.openweathermap.org/data/2.5/group',
-    params: {
-      APPID: 'eac2948bfca65b78a8c5564ecf91d00e',
-      id: cityIdList,
-      units: 'imperial'
+//app factory
+app.factory('weather', function($http) {
+  var APPID = 'eac2948bfca65b78a8c5564ecf91d00e';
+  return {
+    getByCityIds: function(cityIdList, callback) {
+      $http({
+        url:'http://api.openweathermap.org/data/2.5/group',
+        params: {
+          APPID: APPID,
+          id: cityIdList,
+          units: 'imperial'
+        }
+      }).success(callback);
     }
-  })
-  .success(function(data) {
-    $scope.weather = data;
-    console.log(data);
+  };
+});
+
+//app controller
+app.controller('MapController', function($scope, weather) {
+  weather.getByCityIds(cityIdList, function(data) {
     $scope.result = data.list;
     var result = data.list;
     var infowindows = [];
@@ -67,15 +71,15 @@ app.controller('MapController', function($scope, $http) {
       console.log(result);
 
       var windowContent =
-        '<p><strong>' + result.name.toLowerCase() + '</strong></p>' +
-        '<p>weather: ' + result.weather[0].description.toLowerCase() + '<br>' +
-        'current temp: ' + result.main.temp + '°F<br>' +
-        'high temp: ' + result.main.temp_max + '°F<br>' +
-        'low temp: ' + result.main.temp_min + '°F<br>' +
-        'pressure: ' + result.main.pressure + ' hPa<br>' +
-        'humidity: ' + result.main.humidity + '%<br>' +
-        'wind degree: ' + result.wind.deg + '<br>' +
-        'wind speed: ' + result.wind.speed + ' mph</p>';
+      '<p><strong>' + result.name.toLowerCase() + '</strong></p>' +
+      '<p>weather: ' + result.weather[0].description.toLowerCase() + '<br>' +
+      'current temp: ' + result.main.temp + '°F<br>' +
+      'high temp: ' + result.main.temp_max + '°F<br>' +
+      'low temp: ' + result.main.temp_min + '°F<br>' +
+      'pressure: ' + result.main.pressure + ' hPa<br>' +
+      'humidity: ' + result.main.humidity + '%<br>' +
+      'wind degree: ' + result.wind.deg + '<br>' +
+      'wind speed: ' + result.wind.speed + ' mph</p>';
 
       var infowindow = new google.maps.InfoWindow({
         content: windowContent
@@ -101,16 +105,13 @@ app.controller('MapController', function($scope, $http) {
       return marker;
     });
     console.log(markers);
-
   });
 
   //put map up
   var centerLatLng = {lat: 39.099727, lng: -94.578567};
-
   var mapOptions = {
     center: centerLatLng,
-    zoom: 5
+    zoom: 4
   };
-
   var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 }); //end controller
