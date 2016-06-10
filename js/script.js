@@ -88,7 +88,7 @@ app.factory('googleMaps', function() {
             anchor: new google.maps.Point(25, 25)
           }
         });
-        // console.log(result);
+        console.log(result);
 
         var windowContent =
         '<p><strong>' + result.name.toLowerCase() + '</strong></p>' +
@@ -99,8 +99,7 @@ app.factory('googleMaps', function() {
         'pressure: ' + result.main.pressure + ' hPa<br>' +
         'humidity: ' + result.main.humidity + '%<br>' +
         'wind degree: ' + result.wind.deg + '<br>' +
-        'wind speed: ' + result.wind.speed + ' mph<br>' +
-        '<a href="#/">see 5 day forecast</a></p>';
+        'wind speed: ' + result.wind.speed + ' mph</p>';
 
         var infowindow = new google.maps.InfoWindow({
           content: windowContent
@@ -126,6 +125,29 @@ app.factory('googleMaps', function() {
         return marker;
       });
       // console.log(markers);
+    },
+    plotForecastData: function(result, map) {
+      var infowindows = [];
+      //add markers
+      // var markers = result.map(function(result) {
+      //image icons base
+      var iconBase = 'http://openweathermap.org/img/w/';
+      //get coordinates
+      var position = { lat: result.city.coord.lat, lng: result.city.coord.lon };
+      var marker = new google.maps.Marker({
+        position: position,
+        anchorPoint: new google.maps.Point(0, -15),
+        title: result.city.name,
+        map: map,
+        // icon: image
+        icon: {
+          url: iconBase + result.list[0].weather[0].icon + '.png',
+          size: new google.maps.Size(50, 50),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(25, 25)
+        }
+      });
+      console.log(result);
     }
   };
 }); //end - google maps factory
@@ -141,7 +163,7 @@ app.controller('MapController', function($scope, weather, googleMaps) {
 }); //end - main map controller
 
 //forecast controller
-app.controller('ForecastController', function($scope, $http, $routeParams) {
+app.controller('ForecastController', function($scope, $http, $routeParams, googleMaps) {
   $scope.cityId = $routeParams.cityId;
   $http({
     url:'http://api.openweathermap.org/data/2.5/forecast',
@@ -153,5 +175,7 @@ app.controller('ForecastController', function($scope, $http, $routeParams) {
   }).success(function(data) {
     $scope.data = data;
     console.log(data);
+    var map = googleMaps.newMap(data.city.coord.lat, data.city.coord.lon, 6);
+    googleMaps.plotForecastData(data, map);
   });
 }); //end -forecast controller
