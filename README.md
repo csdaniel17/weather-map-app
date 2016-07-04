@@ -10,6 +10,7 @@
 * HTML5 & CSS3
 * JavaScript
 * AngularJS
+  * Angular Routing
 * Google Maps API
 * Open Weather Map API
 
